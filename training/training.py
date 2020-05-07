@@ -75,7 +75,7 @@ def train(config):
     # DataLoader
     dataloader = torch.utils.data.DataLoader(COCODataset(config["train_path"],
                                                          (config["img_w"], config["img_h"]),
-                                                         is_training=True),
+                                                         is_training=False),
                                              batch_size=config["batch_size"],
                                              shuffle=True, num_workers=32, pin_memory=True)
 

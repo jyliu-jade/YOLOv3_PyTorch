@@ -14,8 +14,9 @@ class COCODataset(Dataset):
         self.img_files = []
         self.label_files = []
         for path in open(list_path, 'r'):
+            path = path.split('\n')[0]
             label_path = path.replace('images', 'labels').replace('.png', '.txt').replace(
-                '.jpg', '.txt').strip()
+                '.jpg', '.txt').replace('.jpeg', '.txt').strip()
             if os.path.isfile(label_path):
                 self.img_files.append(path)
                 self.label_files.append(label_path)
@@ -50,6 +51,7 @@ class COCODataset(Dataset):
             labels = np.zeros((1, 5), np.float32)
 
         sample = {'image': img, 'label': labels}
+        print(sample['image'])
         if self.transforms is not None:
             sample = self.transforms(sample)
         sample["image_path"] = img_path
